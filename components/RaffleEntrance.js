@@ -1,6 +1,6 @@
 // Creating a function to enter the lottery
 import { useWeb3Contract } from "react-moralis"
-import { abi, contractAddresses } from "../constants/index"
+import { abi, contractAddresses } from "../constants"
 import { useMoralis } from "react-moralis"
 import { useEffect, useState } from "react"
 import { ethers } from "ethers"
@@ -12,9 +12,9 @@ export default function RaffleEntrance() {
     const raffleAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
     // State Hooks
-    let [entranceFee, setEntranceFee] = useState("0")
-    let [numberOfPlayers, setNumberOfPlayers] = useState("0")
-    let [recentWinner, setRecentWinner] = useState("0")
+    const [entranceFee, setEntranceFee] = useState("0")
+    const [numberOfPlayers, setNumberOfPlayers] = useState("0")
+    const [recentWinner, setRecentWinner] = useState("0")
 
     const dispatch = useNotification()
 
@@ -55,7 +55,7 @@ export default function RaffleEntrance() {
 
     async function updatedUI() {
         const entranceFeeFromCall = (await getEntranceFee()).toString()
-        const numPlayersFromCall = (await getNumberOfPlayers()).toString()
+        const numPlayersFromCall = (await getPlayersNumber()).toString()
         const recentWinnerFromCall = await getRecentWinner()
         setEntranceFee(entranceFeeFromCall)
         setNumberOfPlayers(numPlayersFromCall)
@@ -70,7 +70,7 @@ export default function RaffleEntrance() {
         }
     }, [isWeb3Enabled])
 
-    const handleSuccess = async function (tc) {
+    const handleSuccess = async function (tx) {
         await tx.wait(1)
         handleNewNotification(tx)
         updatedUI()
@@ -88,7 +88,7 @@ export default function RaffleEntrance() {
 
     return (
         <div className="p-5">
-            <h1 className="py-4 px-4 font-bold text-3xl"> The Decentralized Raffle </h1>
+            <h1 className="py-4 px-4 font-blog text-3xl"> Welcome to the Decentralized Raffle </h1>
             {raffleAddress ? (
                 <div>
                     <button
