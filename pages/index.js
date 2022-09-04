@@ -9,6 +9,7 @@ export default function Home() {
     const { isWeb3Enabled, chainId } = useMoralis()
 
     return (
+        
         <div className={styles.container}>
             <Head>
                 <title> Raffle</title>
@@ -19,6 +20,7 @@ export default function Home() {
             {/*<ManualHeader />*/}
             <Header />
             <RaffleEntrance />
+
         </div>
     )
 }

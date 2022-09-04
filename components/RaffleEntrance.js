@@ -92,7 +92,7 @@ export default function RaffleEntrance() {
             {raffleAddress ? (
                 <div>
                     <button
-                        className="bg-blue-500 hover:bg-blue 700 text-white font-bold py-2 px-4 rounded ml-auto"
+                        className="bg-blue-500 hover:bg-blue 700 text-white font-bold py-4 px-9 rounded ml-auto "
                         onClick={async () =>
                             await enterRaffle({
                                 onSuccess: handleSuccess,
